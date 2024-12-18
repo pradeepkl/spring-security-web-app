@@ -24,6 +24,10 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    private int failedAttempts;
+
+    private boolean accountLocked;
+
     private boolean enabled;
 
     @Column(name = "reset_token")

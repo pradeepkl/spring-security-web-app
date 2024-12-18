@@ -2,8 +2,11 @@ package com.classpathio.orders.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.ObjectPostProcessor;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -56,5 +59,13 @@ public class SecurityConfig {
         http.headers().frameOptions().sameOrigin();
 
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManagerBean(HttpSecurity httpSecurity) throws Exception {
+        AuthenticationManagerBuilder builder = new AuthenticationManagerBuilder(httpSecurity.getSharedObject(ObjectPostProcessor.class));
+        builder.authenticationProvider(new DaoAuthenticationProvider());
+        builder.authenticationProvider(authenticationProvider());
+        return builder.build();
     }
 }

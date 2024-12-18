@@ -26,6 +26,10 @@ public class DomainUserDetailsService implements UserDetailsService {
         User user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with email: " + username));
 
+        if(user.isAccountLocked()) {
+            throw new IllegalArgumentException("Account is locked");
+        }
+
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPassword(),
