@@ -1,0 +1,23 @@
+<!-- src/main/resources/templates/order-details.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Order Details</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Order #<span th:text="${order.id}"></span></h5>
+            <p class="card-text"><strong>Customer Name:</strong> <span th:text="${order.customerName}"></span></p>
+            <p class="card-text"><strong>Total Price:</strong> <span th:text="${order.totalPrice}"></span></p>
+            <p class="card-text"><strong>Customer Email:</strong> <span th:text="${order.customerEmail}"></span></p>
+        </div>
+    </div>
+    <a href="/orders" class="btn btn-secondary mt-3">Back to Orders</a>
+</div>
+</body>
+</html>

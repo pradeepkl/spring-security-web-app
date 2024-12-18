@@ -1,0 +1,31 @@
+<!-- src/main/resources/templates/order-form.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create/Edit Order</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 th:if="${order.id == null}">Create Order</h1>
+    <h1 th:if="${order.id != null}">Edit Order</h1>
+    <form th:action="${order.id != null ? '/orders/edit/' + order.id : '/orders/create'}" th:object="${order}" method="post">
+        <div class="form-group">
+            <label for="customerName">Customer Name</label>
+            <input type="text" class="form-control" id="customerName" th:field="*{customerName}" required>
+        </div>
+        <div class="form-group">
+            <label for="totalPrice">Total Price</label>
+            <input type="number" step="0.01" class="form-control" id="totalPrice" th:field="*{totalPrice}" required>
+        </div>
+        <div class="form-group">
+            <label for="customerEmail">Customer Email</label>
+            <input type="email" class="form-control" id="customerEmail" th:field="*{customerEmail}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/orders" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+</body>
+</html>
